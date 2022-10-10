@@ -11,3 +11,35 @@
  */
 
 import java.util.List;
+
+class DrivableTrader extends Trader<Drivable>{
+
+    private List<Drivable> inventory;
+    private List<Drivable> wishlist;
+    /**
+     * Construct a DrivableTrader, giving them the
+     * given inventory, wishlist, and money
+     *
+     * @param inventory Drivable objects in this Trader's inventory
+     * @param wishlist  Drivable objects in this Trader's wishlist
+     * @param money     The Trader's money
+     */
+    public DrivableTrader(int money, List<Drivable> inventory, List<Drivable> wishlist){
+        super(money);
+        this.inventory = inventory;
+        this.wishlist = wishlist;
+    }
+
+    @Override
+    public int getSellingPrice(Drivable item) {
+        int super_price = super.getSellingPrice(item);
+        if (super_price == Tradable.MISSING_PRICE) {
+            return super_price;
+        }
+
+        return super_price + item.getMaxSpeed();
+    }
+
+
+    }
+
